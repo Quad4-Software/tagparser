@@ -3,7 +3,7 @@ package tagparser_test
 import (
 	"fmt"
 
-	"github.com/vmihailenco/tagparser/v2"
+	"git.quad4.io/Go-Libs/tagparser/v2/pkg/tagparser"
 )
 
 func ExampleParse() {

@@ -3,7 +3,7 @@ package parser
 import (
 	"bytes"
 
-	"github.com/vmihailenco/tagparser/v2/internal"
+	"git.quad4.io/Go-Libs/tagparser/v2/internal"
 )
 
 type Parser struct {

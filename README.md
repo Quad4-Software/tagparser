@@ -1,24 +1,46 @@
-# Opinionated Golang tag parser
+# tagparser (Quad4 fork)
 
-[![Build Status](https://travis-ci.org/vmihailenco/tagparser.png?branch=master)](https://travis-ci.org/vmihailenco/tagparser)
-[![GoDoc](https://godoc.org/github.com/vmihailenco/tagparser?status.svg)](https://godoc.org/github.com/vmihailenco/tagparser)
+This repository is a **fork** of [github.com/vmihailenco/tagparser](https://github.com/vmihailenco/tagparser) (v2 API), **maintained by Quad4** at `git.quad4.io/Go-Libs/tagparser`. The upstream helper is small and stable; this fork updates the Go toolchain, module path, layout, CI, and tests.
 
-## Installation
+Import the library as:
+
+```go
+import "git.quad4.io/Go-Libs/tagparser/v2/pkg/tagparser"
+```
 
 Install:
 
-```shell
-go get github.com/vmihailenco/tagparser/v2
+```bash
+go get git.quad4.io/Go-Libs/tagparser/v2@latest
 ```
 
-## Quickstart
+The module path is `git.quad4.io/Go-Libs/tagparser/v2` (the `/v2` suffix matches the major version). Library sources live under **`pkg/tagparser/`**; **`internal/parser`** holds the low-level byte scanner; **`internal`** provides App Engine–safe or unsafe string/byte helpers.
 
-```go
-func ExampleParse() {
-	tag := tagparser.Parse("some_name,key:value,key2:'complex value'")
-	fmt.Println(tag.Name)
-	fmt.Println(tag.Options)
-	// Output: some_name
-	// map[key:value key2:'complex value']
-}
-```
+## Features
+
+- Parses comma-separated tag names and `key:value` options, including quoted segments and parentheses in values.
+
+## Layout
+
+| Path | Purpose |
+|------|---------|
+| `pkg/tagparser` | Public API (`Parse`, `Tag`, `HasOption`) |
+| `internal/parser` | Incremental parser over bytes |
+| `internal` | `StringToBytes` / `BytesToString` (unsafe on non-App Engine) |
+| `scripts/ci` | Local CI parity with Gitea (`test-all.sh`, `scan-all.sh`, `setup-go.sh`, …) |
+| `.gitea/workflows` | CI (`ci.yml`) and security scan (`scan.yml`) |
+
+## Testing
+
+- **Unit**: table-driven cases in `tagparser_test.go`, `invariant_test.go`, `tagparser_more_test.go`; low-level **`internal/parser`** tests in `internal/parser/parser_test.go`.
+- **Property-based**: [pbt](https://git.quad4.io/Go-Libs/pbt) in `pbt_test.go` (no panic, determinism, `HasOption` vs map).
+- **Fuzz**: `FuzzParse` / `FuzzDeterminism` on the parser; `FuzzUntrustedTag` for hostile-style inputs (NULs, long runs, bidi/unicode). **`internal`**: `FuzzBytesToString`, `FuzzStringToBytes`, `FuzzConvertRoundtrip` assert unsafe (or safe) conversions match `string` / `[]byte` copy semantics. Example:  
+  `go test ./pkg/tagparser -fuzz=FuzzParse -fuzztime=30s`  
+  `go test ./internal -fuzz=FuzzConvertRoundtrip -fuzztime=30s`
+- **Unsafe vs App Engine**: `internal/unsafe_invariants_test.go` (`!appengine`) checks `len`/`cap` on `StringToBytes`. Run the safe build with `go test -tags=appengine ./internal/...`.
+- **Stress** (skipped with `-short`): concurrent parses, long inputs, many comma-separated segments, deep parentheses in `stress_test.go`.
+- **Benchmarks**: `go test ./... -bench=. -benchmem -run=^$` — includes `BenchmarkParse` subcases, parallel and throughput benches, and `internal/parser` `BenchmarkParser_ReadSep`.
+
+## License
+
+BSD 2-clause; see [LICENSE](LICENSE). Original copyright remains with the vmihailenco authors; fork maintenance is attributed in this README.

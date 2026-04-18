@@ -1,3 +1,5 @@
-module github.com/vmihailenco/tagparser/v2
+module git.quad4.io/Go-Libs/tagparser/v2
 
-go 1.15
+go 1.26.2
+
+require git.quad4.io/Go-Libs/pbt v0.0.0-20260222224506-d027ddfbe012

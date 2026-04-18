@@ -3,7 +3,7 @@ package tagparser
 import (
 	"strings"
 
-	"github.com/vmihailenco/tagparser/v2/internal/parser"
+	"git.quad4.io/Go-Libs/tagparser/v2/internal/parser"
 )
 
 type Tag struct {
@@ -12,14 +12,15 @@ type Tag struct {
 }
 
 func (t *Tag) HasOption(name string) bool {
+	if t.Options == nil {
+		return false
+	}
 	_, ok := t.Options[name]
 	return ok
 }
 
 func Parse(s string) *Tag {
-	p := &tagParser{
-		Parser: parser.NewString(s),
-	}
+	p := &tagParser{Parser: parser.NewString(s)}
 	p.parseKey()
 	return &p.Tag
 }
@@ -27,9 +28,11 @@ func Parse(s string) *Tag {
 type tagParser struct {
 	*parser.Parser
 
-	Tag     Tag
+	Tag Tag
+	// buf is reused across segments; nil until the first append. Each segment converts to a
+	// fresh string via string(b) before another segment overwrites the backing array.
+	buf     []byte
 	hasName bool
-	key     string
 }
 
 func (p *tagParser) setTagOption(key, value string) {
@@ -54,23 +57,24 @@ func (p *tagParser) setTagOption(key, value string) {
 }
 
 func (p *tagParser) parseKey() {
-	p.key = ""
-
-	var b []byte
+	b := p.buf[:0]
 	for p.Valid() {
 		c := p.Read()
 		switch c {
 		case ',':
 			p.Skip(' ')
 			p.setTagOption("", string(b))
+			p.buf = b
 			p.parseKey()
 			return
 		case ':':
-			p.key = string(b)
-			p.parseValue()
+			key := string(b)
+			p.buf = b
+			p.parseValue(key)
 			return
 		case '\'':
-			p.parseQuotedValue()
+			p.buf = b
+			p.parseQuotedValue("")
 			return
 		default:
 			b = append(b, c)
@@ -82,16 +86,16 @@ func (p *tagParser) parseKey() {
 	}
 }
 
-func (p *tagParser) parseValue() {
+func (p *tagParser) parseValue(key string) {
 	const quote = '\''
 	c := p.Peek()
 	if c == quote {
 		p.Skip(quote)
-		p.parseQuotedValue()
+		p.parseQuotedValue(key)
 		return
 	}
 
-	var b []byte
+	b := p.buf[:0]
 	for p.Valid() {
 		c = p.Read()
 		switch c {
@@ -102,14 +106,15 @@ func (p *tagParser) parseValue() {
 			b = p.readBrackets(b)
 		case ',':
 			p.Skip(' ')
-			p.setTagOption(p.key, string(b))
+			p.setTagOption(key, string(b))
+			p.buf = b
 			p.parseKey()
 			return
 		default:
 			b = append(b, c)
 		}
 	}
-	p.setTagOption(p.key, string(b))
+	p.setTagOption(key, string(b))
 }
 
 func (p *tagParser) readBrackets(b []byte) []byte {
@@ -136,9 +141,9 @@ loop:
 	return b
 }
 
-func (p *tagParser) parseQuotedValue() {
+func (p *tagParser) parseQuotedValue(key string) {
 	const quote = '\''
-	var b []byte
+	b := p.buf[:0]
 	for p.Valid() {
 		bb, ok := p.ReadSep(quote)
 		if !ok {
@@ -146,8 +151,6 @@ func (p *tagParser) parseQuotedValue() {
 			break
 		}
 
-		// keep the escaped single-quote, and continue until we've found the
-		// one that isn't.
 		if len(bb) > 0 && bb[len(bb)-1] == '\\' {
 			b = append(b, bb[:len(bb)-1]...)
 			b = append(b, quote)
@@ -158,7 +161,8 @@ func (p *tagParser) parseQuotedValue() {
 		break
 	}
 
-	p.setTagOption(p.key, string(b))
+	p.setTagOption(key, string(b))
+	p.buf = b
 	if p.Skip(',') {
 		p.Skip(' ')
 	}

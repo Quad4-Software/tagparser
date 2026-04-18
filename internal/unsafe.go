@@ -1,5 +1,7 @@
+//go:build !appengine
 // +build !appengine
 
+// #nosec G103 -- String/byte views use unsafe as a zero-alloc alternative to copying; callers treat buffers as read-only.
 package internal
 
 import (
