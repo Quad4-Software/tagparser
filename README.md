@@ -1,20 +1,20 @@
 # tagparser (Quad4 fork)
 
-This repository is a **fork** of [github.com/vmihailenco/tagparser](https://github.com/vmihailenco/tagparser) (v2 API), **maintained by Quad4** at `git.quad4.io/Go-Libs/tagparser`. The upstream helper is small and stable; this fork updates the Go toolchain, module path, layout, CI, and tests.
+This repository is a **fork** of [github.com/vmihailenco/tagparser](https://github.com/vmihailenco/tagparser) (v2 API), **maintained by Quad4** at `github.com/Quad4-Software/tagparser`. The upstream helper is small and stable; this fork updates the Go toolchain, module path, layout, CI, and tests.
 
 Import the library as:
 
 ```go
-import "git.quad4.io/Go-Libs/tagparser/v2/pkg/tagparser"
+import "github.com/Quad4-Software/tagparser"
 ```
 
 Install:
 
 ```bash
-go get git.quad4.io/Go-Libs/tagparser/v2@latest
+go get github.com/Quad4-Software/tagparser/v2@latest
 ```
 
-The module path is `git.quad4.io/Go-Libs/tagparser/v2` (the `/v2` suffix matches the major version). Library sources live under **`pkg/tagparser/`**; **`internal/parser`** holds the low-level byte scanner; **`internal`** provides App Engine–safe or unsafe string/byte helpers.
+The module path is `github.com/Quad4-Software/tagparser/v2` (the `/v2` suffix matches the major version). Library sources live under **`pkg/tagparser/`**; **`internal/parser`** holds the low-level byte scanner; **`internal`** provides App Engine–safe or unsafe string/byte helpers.
 
 ## Features
 
@@ -33,7 +33,7 @@ The module path is `git.quad4.io/Go-Libs/tagparser/v2` (the `/v2` suffix matches
 ## Testing
 
 - **Unit**: table-driven cases in `tagparser_test.go`, `invariant_test.go`, `tagparser_more_test.go`; low-level **`internal/parser`** tests in `internal/parser/parser_test.go`.
-- **Property-based**: [pbt](https://git.quad4.io/Go-Libs/pbt) in `pbt_test.go` (no panic, determinism, `HasOption` vs map).
+- **Property-based**: [pbt](https://github.com/Quad4-Software/pbt) in `pbt_test.go` (no panic, determinism, `HasOption` vs map).
 - **Fuzz**: `FuzzParse` / `FuzzDeterminism` on the parser; `FuzzUntrustedTag` for hostile-style inputs (NULs, long runs, bidi/unicode). **`internal`**: `FuzzBytesToString`, `FuzzStringToBytes`, `FuzzConvertRoundtrip` assert unsafe (or safe) conversions match `string` / `[]byte` copy semantics. Example:  
   `go test ./pkg/tagparser -fuzz=FuzzParse -fuzztime=30s`  
   `go test ./internal -fuzz=FuzzConvertRoundtrip -fuzztime=30s`
