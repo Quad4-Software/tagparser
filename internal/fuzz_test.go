@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"testing"
 
-	"git.quad4.io/Go-Libs/tagparser/v2/internal"
+	"github.com/Quad4-Software/tagparser/internal"
 )
 
 func FuzzBytesToString(f *testing.F) {

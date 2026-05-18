@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	"git.quad4.io/Go-Libs/tagparser/v2/pkg/tagparser"
+	"github.com/Quad4-Software/tagparser/pkg/tagparser"
 )
 
 func TestParse_neverNil(t *testing.T) {

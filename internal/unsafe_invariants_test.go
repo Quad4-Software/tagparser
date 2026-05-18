@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"testing"
 
-	"git.quad4.io/Go-Libs/tagparser/v2/internal"
+	"github.com/Quad4-Software/tagparser/internal"
 )
 
 // StringToBytes for the non-appengine build uses a slice header with len==cap==len(s).

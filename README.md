@@ -11,10 +11,10 @@ import "github.com/Quad4-Software/tagparser"
 Install:
 
 ```bash
-go get github.com/Quad4-Software/tagparser/v2@latest
+go get github.com/Quad4-Software/tagparser@latest
 ```
 
-The module path is `github.com/Quad4-Software/tagparser/v2` (the `/v2` suffix matches the major version). Library sources live under **`pkg/tagparser/`**; **`internal/parser`** holds the low-level byte scanner; **`internal`** provides App Engine–safe or unsafe string/byte helpers.
+The module path is `github.com/Quad4-Software/tagparser`. Library sources live under **`pkg/tagparser/`**; **`internal/parser`** holds the low-level byte scanner; **`internal`** provides App Engine–safe or unsafe string/byte helpers.
 
 ## Features
 
