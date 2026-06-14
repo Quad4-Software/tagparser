@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/Quad4-Software/tagparser/internal"
+	"quad4/tagparser/internal"
 )
 
 func TestBytesToString_equivalence(t *testing.T) {

@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/Quad4-Software/tagparser/pkg/tagparser"
+	"quad4/tagparser/pkg/tagparser"
 )
 
 func TestParse_neverNil(t *testing.T) {

@@ -1,13 +1,13 @@
-## [2.1.0](https://github.com/Quad4-Software/tagparser) (2026-04-18)
+## [2.1.0](https://quad4/tagparser) (2026-04-18)
 
 Quad4 fork: module path, layout, toolchain, CI, performance, and tests.
 
-This is the first **git tag** whose `go.mod` declares `github.com/Quad4-Software/tagparser/v2`, so consumers can depend on **`v2.1.0`** with plain `go get`.
+This is the first **git tag** whose `go.mod` declares `quad4/tagparser/v2`, so consumers can depend on **`v2.1.0`** with plain `go get`.
 
 ### Module and imports
 
-- Module path is `github.com/Quad4-Software/tagparser/v2`.
-- Import the API as `github.com/Quad4-Software/tagparser/v2/pkg/tagparser`.
+- Module path is `quad4/tagparser/v2`.
+- Import the API as `quad4/tagparser/v2/pkg/tagparser`.
 
 ### Toolchain
 
@@ -37,7 +37,7 @@ This is the first **git tag** whose `go.mod` declares `github.com/Quad4-Software
 
 - **Unit**: `tagparser_test.go` (table cases), `tagparser_more_test.go` (`HasOption` + option values), `invariant_test.go` (Parse never `nil`, idempotent across all table cases).
 - **Examples**: `example_test.go`.
-- **Property-based** via [pbt](https://github.com/Quad4-Software/pbt): `pbt_test.go` (no panic, determinism, `HasOption` matches `Options`).
+- **Property-based** via [pbt](https://quad4/pbt): `pbt_test.go` (no panic, determinism, `HasOption` matches `Options`).
 - **Fuzz**: `FuzzParse`, `FuzzDeterminism`, `FuzzUntrustedTag` (NULs, long runs, bidi/unicode).
 - **Stress** (skipped with `-short`): concurrent parses (64 goroutines), 256 KiB inputs, 4096 repeated segments, 2000-deep parens.
 - **Internal**: `internal/parser/parser_test.go` (Parser API + `BenchmarkParser_ReadSep`), `internal/convert_test.go` (`StringToBytes`/`BytesToString` equivalence), `internal/unsafe_invariants_test.go` (`!appengine` `len`/`cap` invariants), `internal/fuzz_test.go` (`FuzzBytesToString`, `FuzzStringToBytes`, `FuzzConvertRoundtrip`).

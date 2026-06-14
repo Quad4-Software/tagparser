@@ -3,7 +3,7 @@ package parser
 import (
 	"bytes"
 
-	"github.com/Quad4-Software/tagparser/internal"
+	"quad4/tagparser/internal"
 )
 
 type Parser struct {

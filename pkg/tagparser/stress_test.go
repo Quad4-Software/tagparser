@@ -7,7 +7,7 @@ import (
 	"sync/atomic"
 	"testing"
 
-	"github.com/Quad4-Software/tagparser/pkg/tagparser"
+	"quad4/tagparser/pkg/tagparser"
 )
 
 func TestStressConcurrentParse(t *testing.T) {

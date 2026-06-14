@@ -4,8 +4,8 @@ import (
 	"maps"
 	"testing"
 
-	"github.com/Quad4-Software/tagparser/pkg/tagparser"
-	"github.com/Quad4-Software/pbt/pkg/pbt"
+	"quad4/tagparser/pkg/tagparser"
+	"quad4/pbt/pkg/pbt"
 )
 
 func byteSliceToString(xs []int) string {

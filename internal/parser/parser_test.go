@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/Quad4-Software/tagparser/internal/parser"
+	"quad4/tagparser/internal/parser"
 )
 
 func TestParser_Read_exhausts(t *testing.T) {

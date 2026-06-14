@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/Quad4-Software/tagparser/internal"
+	"quad4/tagparser/internal"
 )
 
 func FuzzBytesToString(f *testing.F) {

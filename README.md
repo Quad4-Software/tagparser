@@ -1,20 +1,20 @@
 # tagparser (Quad4 fork)
 
-This repository is a **fork** of [github.com/vmihailenco/tagparser](https://github.com/vmihailenco/tagparser) (v2 API), **maintained by Quad4** at `github.com/Quad4-Software/tagparser`. The upstream helper is small and stable; this fork updates the Go toolchain, module path, layout, CI, and tests.
+This repository is a **fork** of [github.com/vmihailenco/tagparser](https://github.com/vmihailenco/tagparser) (v2 API), **maintained by Quad4** at `quad4/tagparser`. The upstream helper is small and stable; this fork updates the Go toolchain, module path, layout, CI, and tests.
 
 Import the library as:
 
 ```go
-import "github.com/Quad4-Software/tagparser"
+import "quad4/tagparser"
 ```
 
 Install:
 
 ```bash
-go get github.com/Quad4-Software/tagparser@latest
+go get quad4/tagparser@latest
 ```
 
-The module path is `github.com/Quad4-Software/tagparser`. Library sources live under **`pkg/tagparser/`**; **`internal/parser`** holds the low-level byte scanner; **`internal`** provides App Engine–safe or unsafe string/byte helpers.
+The module path is `quad4/tagparser`. Library sources live under **`pkg/tagparser/`**; **`internal/parser`** holds the low-level byte scanner; **`internal`** provides App Engine–safe or unsafe string/byte helpers.
 
 ## Features
 
@@ -33,7 +33,7 @@ The module path is `github.com/Quad4-Software/tagparser`. Library sources live u
 ## Testing
 
 - **Unit**: table-driven cases in `tagparser_test.go`, `invariant_test.go`, `tagparser_more_test.go`; low-level **`internal/parser`** tests in `internal/parser/parser_test.go`.
-- **Property-based**: [pbt](https://github.com/Quad4-Software/pbt) in `pbt_test.go` (no panic, determinism, `HasOption` vs map).
+- **Property-based**: [pbt](https://quad4/pbt) in `pbt_test.go` (no panic, determinism, `HasOption` vs map).
 - **Fuzz**: `FuzzParse` / `FuzzDeterminism` on the parser; `FuzzUntrustedTag` for hostile-style inputs (NULs, long runs, bidi/unicode). **`internal`**: `FuzzBytesToString`, `FuzzStringToBytes`, `FuzzConvertRoundtrip` assert unsafe (or safe) conversions match `string` / `[]byte` copy semantics. Example:  
   `go test ./pkg/tagparser -fuzz=FuzzParse -fuzztime=30s`  
   `go test ./internal -fuzz=FuzzConvertRoundtrip -fuzztime=30s`

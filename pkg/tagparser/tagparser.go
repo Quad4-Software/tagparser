@@ -3,7 +3,7 @@ package tagparser
 import (
 	"strings"
 
-	"github.com/Quad4-Software/tagparser/internal/parser"
+	"quad4/tagparser/internal/parser"
 )
 
 type Tag struct {

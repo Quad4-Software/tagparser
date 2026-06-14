@@ -1,0 +1,4 @@
+# quad4/pbt v0.0.0 => ../pbt
+## explicit; go 1.26.2
+quad4/pbt/pkg/pbt
+# quad4/pbt => ../pbt

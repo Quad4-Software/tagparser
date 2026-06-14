@@ -3,7 +3,7 @@ package tagparser_test
 import (
 	"fmt"
 
-	"github.com/Quad4-Software/tagparser/pkg/tagparser"
+	"quad4/tagparser/pkg/tagparser"
 )
 
 func ExampleParse() {

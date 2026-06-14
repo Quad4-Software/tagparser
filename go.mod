@@ -1,5 +1,7 @@
-module github.com/Quad4-Software/tagparser
+module quad4/tagparser
 
 go 1.26.2
 
-require github.com/Quad4-Software/pbt v0.0.0-20260222224506-d027ddfbe012
+require quad4/pbt v0.0.0
+
+replace quad4/pbt => ../pbt
