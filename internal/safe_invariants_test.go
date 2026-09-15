@@ -6,7 +6,7 @@ package internal_test
 import (
 	"testing"
 
-	"github.com/Quad4-Software/tagparser/internal"
+	"github.com/Quad4-Software/tagparser/v2/internal"
 )
 
 // The safe (appengine) variant must copy in both directions: mutating one

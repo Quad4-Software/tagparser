@@ -6,7 +6,7 @@ import (
 	"testing"
 
 	"github.com/Quad4-Software/pbt/pkg/pbt"
-	"github.com/Quad4-Software/tagparser/pkg/tagparser"
+	"github.com/Quad4-Software/tagparser/v2/pkg/tagparser"
 )
 
 // naiveTag is the oracle result type; it mirrors tagparser.Tag.

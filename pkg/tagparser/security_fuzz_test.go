@@ -4,7 +4,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/Quad4-Software/tagparser/pkg/tagparser"
+	"github.com/Quad4-Software/tagparser/v2/pkg/tagparser"
 )
 
 // FuzzUntrustedTag feeds potentially hostile inputs (control chars, long runs, unicode).

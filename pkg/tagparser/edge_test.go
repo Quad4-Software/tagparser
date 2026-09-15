@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/Quad4-Software/tagparser/pkg/tagparser"
+	"github.com/Quad4-Software/tagparser/v2/pkg/tagparser"
 )
 
 // edgeCases pins exact expected output for boundary and adversarial inputs.

@@ -1,23 +1,23 @@
 # tagparser
 
-Fork of [github.com/vmihailenco/tagparser](https://github.com/vmihailenco/tagparser), maintained by Quad4 under the module path `github.com/Quad4-Software/tagparser`. The upstream helper is small and stable. This fork updates the Go toolchain, module path, layout, CI, and tests.
+Fork of [github.com/vmihailenco/tagparser](https://github.com/vmihailenco/tagparser), maintained by Quad4 under the module path `github.com/Quad4-Software/tagparser/v2`. The upstream helper is small and stable. This fork updates the Go toolchain, module path, layout, CI, and tests.
 
 The parser reads comma-separated tag names and `key:value` options, including quoted segments and parentheses inside values.
 
 ## Install
 
 ```bash
-go get github.com/Quad4-Software/tagparser@latest
+go get github.com/Quad4-Software/tagparser/v2@latest
 ```
 
 For local development against a checkout, point a replace directive at it:
 
 ```go
-replace github.com/Quad4-Software/tagparser => ../tagparser
+replace github.com/Quad4-Software/tagparser/v2 => ../tagparser
 ```
 
 ```go
-import "github.com/Quad4-Software/tagparser/pkg/tagparser"
+import "github.com/Quad4-Software/tagparser/v2/pkg/tagparser"
 ```
 
 ## Layout

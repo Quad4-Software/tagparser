@@ -1,4 +1,4 @@
-## [2.1.0](https://github.com/Quad4-Software/tagparser) (2026-04-18)
+## [2.1.0](https://github.com/Quad4-Software/tagparser/v2) (2026-04-18)
 
 Quad4 fork: module path, layout, toolchain, CI, performance, and tests.
 

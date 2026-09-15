@@ -3,7 +3,7 @@ package tagparser_test
 import (
 	"testing"
 
-	"github.com/Quad4-Software/tagparser/pkg/tagparser"
+	"github.com/Quad4-Software/tagparser/v2/pkg/tagparser"
 )
 
 func TestTag_HasOption(t *testing.T) {
