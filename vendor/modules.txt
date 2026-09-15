@@ -1,0 +1,4 @@
+# github.com/Quad4-Software/pbt v0.0.0 => ../pbt
+## explicit; go 1.27.1
+github.com/Quad4-Software/pbt/pkg/pbt
+# github.com/Quad4-Software/pbt => ../pbt
